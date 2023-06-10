@@ -6,6 +6,7 @@ int main()
 	std::string tmp;
 	while (true)
 	{
+		std::cout << "ENTER THE COMMAND: ";
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			return (1);

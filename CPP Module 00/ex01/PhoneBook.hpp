@@ -2,10 +2,12 @@
 #define PHONEBOOK_HPP
 
 #include "Contact.hpp"
+#include <iomanip>
 
 class PhoneBook
 {
 	int		index;
+	int		size;
 	Contact contact[8];
 	public:
 		PhoneBook();
