@@ -60,20 +60,24 @@ void	PhoneBook::SEARCH(void)
 {
 	int	i;
 	std::string	tmp;
+	if (size == 0)
+		return;
 	for (int j = 0; j < size; j++)
 	{
 		std::cout << j << '|'<< std::setw(10) << contact[j].GetFName() << '|' << std::setw(10) << contact[j].GetLName() << '|' << std::setw(10) << contact[j].GetNName() << std::endl;
 	}
 	std::cout << "ENTER THE INDEX: ";
 	getline(std::cin, tmp);
-	i = std::atoi(tmp.c_str());
+	i = std::atoi(tmp.c_str());  // std::stringstream
 	if (i < 0 || i > 7)
 		std::cout << "[ERROR] INCORRECT INDEX";
-	
+	if (i <= size)
+	{
 	std::cout << std::setw(12) << "INDEX: " << i << std::endl;
 	std::cout << std::setw(12) << "FIRST NAME: " << contact[i].GetFName() << std::endl;
 	std::cout << std::setw(12) << "LAST NAME: " << contact[i].GetLName() << std::endl;
 	std::cout << std::setw(12) << "NICKNAME: " << contact[i].GetNName() << std::endl;
+	}
 }
 
 void	PhoneBook::EXIT(void)
