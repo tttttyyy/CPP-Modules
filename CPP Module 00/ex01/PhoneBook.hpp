@@ -16,6 +16,5 @@ class PhoneBook
 
 	void	ADD(void);
 	void	SEARCH(void);
-	void	EXIT(void);
 };
 #endif

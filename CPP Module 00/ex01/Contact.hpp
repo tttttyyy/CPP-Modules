@@ -13,11 +13,11 @@ class Contact
 	public:
 		Contact();
 		~Contact();
-		std::string GetFName();
-		std::string GetLName();
-		std::string GetNName();
-		std::string GetPNum();
-		std::string GetDSec();
+		std::string GetFName() const;
+		std::string GetLName() const;
+		std::string GetNName() const;
+		std::string GetPNum() const;
+		std::string GetDSec() const;
 		void SetFName(std::string);
 		void SetLName(std::string);
 		void SetNName(std::string);

@@ -15,7 +15,7 @@ int main()
 		else if (tmp == "SEARCH")
 			PB.SEARCH();
 		else if (tmp == "EXIT")
-			PB.EXIT();
+			break ;
 		else
 			std::cerr << "\033[31m" << "[ERROR] INCORRECT COMMAND" << std::endl;
 	}

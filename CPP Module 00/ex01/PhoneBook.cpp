@@ -121,8 +121,3 @@ void	PhoneBook::SEARCH(void)
 			std::cout << "\033[31m" << "[ERROR] NO VALLUE FOUND\n";
 	}
 }
-
-void	PhoneBook::EXIT(void)
-{
-	exit(0);
-}
