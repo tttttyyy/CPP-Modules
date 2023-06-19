@@ -6,6 +6,22 @@ PhoneBook::PhoneBook()
 }
 PhoneBook::~PhoneBook(){}
 
+int	check_fon(std::string str)
+{
+	unsigned int i;
+
+	i = 0;
+	if (str[i] == '+')
+		++i;
+	while (str[i])
+	{
+		if (!isdigit(str[i]))
+			return (2);
+		++i;
+	}
+	return (0);
+}
+
 void	PhoneBook::ADD(void)
 {
 	std::string	tmp;
@@ -39,7 +55,7 @@ void	PhoneBook::ADD(void)
 	contact[index].SetNName(tmp);
 	std::cout << "ENTER PHONE NUMBER: ";
 	getline(std::cin, tmp);
-	while (std::cin.eof() || tmp.empty())
+	while (std::cin.eof() || tmp.empty() || check_fon(tmp))
 	{
 		std::cout << "MUST ENTER PHONE NUMBER: ";
 		getline(std::cin, tmp);
@@ -78,8 +94,9 @@ void	PhoneBook::SEARCH(void)
 	for (int j = 0; j < size; j++)
 	{
 		
-		std::cout << "\033[0m" << j << '|'<< std::setw(10) << truncate(contact[j].GetFName(), 9, 1)
-		 << '|' << std::setw(10) << truncate(contact[j].GetLName(), 9, 1) << '|' << std::setw(10) << truncate(contact[j].GetNName(), 9, 1) << std::endl;
+		std::cout << "\033[0m" << j << '|'<< std::setw(10) << truncate(contact[j].GetFName(), 9, 1);
+		std::cout << '|' << std::setw(10) << truncate(contact[j].GetLName(), 9, 1);
+		std::cout << '|' << std::setw(10) << truncate(contact[j].GetNName(), 9, 1) << std::endl;
 	}
 	std::cout << "\033[0m" << "ENTER THE INDEX: ";
 	getline(std::cin, tmp);
