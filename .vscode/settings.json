@@ -50,7 +50,17 @@
 		"type_traits": "cpp",
 		"typeinfo": "cpp",
 		"utility": "cpp",
-		"iomanip": "cpp"
+		"iomanip": "cpp",
+		"__hash_table": "cpp",
+		"__node_handle": "cpp",
+		"__split_buffer": "cpp",
+		"array": "cpp",
+		"cmath": "cpp",
+		"complex": "cpp",
+		"optional": "cpp",
+		"sstream": "cpp",
+		"unordered_map": "cpp",
+		"vector": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

@@ -6,7 +6,7 @@ int main()
 	std::string tmp;
 	while (true)
 	{
-		std::cout << "ENTER THE COMMAND: ";
+		std::cout << "\033[0m" << "ENTER THE COMMAND: ";
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			return (1);
@@ -17,6 +17,6 @@ int main()
 		else if (tmp == "EXIT")
 			PB.EXIT();
 		else
-			std::cerr << "[ERROR] INCORRECT COMMAND" << std::endl;
+			std::cerr << "\033[31m" << "[ERROR] INCORRECT COMMAND" << std::endl;
 	}
 }
