@@ -16,12 +16,12 @@ void	Replace::replaceStrings()
 
 	if (!infile.is_open())
 	{
-		std::cerr << "\033[31m" << "[ERROR] NO SUCH FILE !" << "\033[30m" << std::endl;
+		std::cerr << "\033[31m" << "[ERROR] NO SUCH FILE !" << "\033[0m" << std::endl;
 		exit(1);
 	}
 	if (!getline(infile, tmp, '\0'))
 	{
-		std::cerr << "\033[31m" << "[ERROR] FILE IS EMPTY !" << "\033[30m" << std::endl;
+		std::cerr << "\033[31m" << "[ERROR] FILE IS EMPTY !" << "\033[0m" << std::endl;
 		infile.close();
 		exit(2);
 	}

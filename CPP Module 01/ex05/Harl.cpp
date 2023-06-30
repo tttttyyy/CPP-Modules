@@ -8,10 +8,8 @@ Harl::~Harl(){}
 void Harl::complain( std::string level )
 {
 	int index = 0;
-	functionPtr[0] = &Harl::debug;
-	functionPtr[1] = &Harl::info;
-	functionPtr[2] = &Harl::warning;
-	functionPtr[3] = &Harl::error;
+
+	void	(Harl::*functionPtr[4]) () = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	for (; index <= 4 && level.compare(levels[index]); ++index)
 	{

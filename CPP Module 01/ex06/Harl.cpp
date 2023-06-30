@@ -9,7 +9,6 @@ void Harl::complain( std::string level )
 {
 	int index = 0;
 
-	void	(Harl::*functionPtr[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	for (; index <= 4 && level.compare(levels[index]); ++index)
 	{}
@@ -25,7 +24,7 @@ void Harl::complain( std::string level )
 			error();
 			break ;
 		default:
-			std::cout << "[ Probably complaining about insignificant problems ]\n";
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
             break ;
 	}
 
