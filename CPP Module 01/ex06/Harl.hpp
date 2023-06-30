@@ -10,7 +10,6 @@ class Harl
 		~Harl();
 		void complain( std::string );
 	private:
-		// void	(Harl::*functionPtr[4])();
 		void	debug( void );
 		void	info( void );
 		void	warning( void );
