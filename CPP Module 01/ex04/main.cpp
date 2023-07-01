@@ -9,5 +9,4 @@ int main(int argc, char *argv[])
 	}
 	Replace arg(argv[1], argv[2], argv[3]);
 	arg.replaceStrings();
-	system("leaks replace_cover");
 }
