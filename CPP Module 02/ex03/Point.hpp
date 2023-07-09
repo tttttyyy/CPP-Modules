@@ -7,12 +7,13 @@ class Point
 {
 	public:
 		Point();
+		Point(const float);
 		Point(const float, const float);//ymm floating point
 		~Point();
 		Point ( Fixed const& );//copy constructor
 		Point& operator= ( const Point & );//copy assignment
-		int getX( void ) const;
-		int getY( void ) const;
+		Fixed getX( void ) const;
+		Fixed getY( void ) const;
 	private:
 		Fixed const x;
 		Fixed const y;

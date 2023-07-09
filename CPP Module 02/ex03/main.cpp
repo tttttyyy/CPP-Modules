@@ -1,15 +1,12 @@
-#include "Fixed.hpp"
+#include "Point.hpp"
 
 int main( void )
 {
-	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
+ 	Point p1(0, 0), p2(0, 10), p3(10, 0);
+    Point p(2, 2);
+    if (bsp(p1, p2, p3, p))
+        std::cout << "Point is inside triangle!\n";
+    else
+        std::cout << "Point isn't inside triangle!\n";
 	return 0;
 }
