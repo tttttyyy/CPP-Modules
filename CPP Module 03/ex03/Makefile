@@ -1,6 +1,6 @@
-NAME = FragTrap
+NAME = DiamondTrap
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -Wshadow -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra  -std=c++98 #-Wshadow -Wno-shadow
 SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
 RM = rm -rf

@@ -14,7 +14,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
     m_hitPoints = 100;
     m_energyPoints = 50;
     m_attackDamage = 20;
-    std::cout << "\33[1;32mDefault constructor called for ScavTrap \33[0;m" << m_name << std::endl;
+    std::cout << "\33[1;32mParameter constructor called for ScavTrap \33[0;m" << m_name << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& toCopy)
