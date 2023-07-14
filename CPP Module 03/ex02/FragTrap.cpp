@@ -30,7 +30,7 @@ FragTrap::~FragTrap()
 
 FragTrap& FragTrap::operator=(const FragTrap& toCopy)
 {
-    if (*this != toCopy)
+    if (this != &toCopy)
     {
         m_name = toCopy.m_name;
         m_hitPoints = toCopy.m_hitPoints;

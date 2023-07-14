@@ -23,7 +23,7 @@ ClapTrap::ClapTrap(const ClapTrap &toCopy) //copy constructor
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &toCopy) //copy assignment
 {
-    if (*this != toCopy)
+    if (this != &toCopy)
     {
         this->m_name = toCopy.m_name;
         this->m_hitPoints = toCopy.m_hitPoints;
