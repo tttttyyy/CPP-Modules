@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-
 class ClapTrap
 {
     public:
@@ -11,8 +10,9 @@ class ClapTrap
         ClapTrap(std::string);
         ClapTrap(const ClapTrap &); //copy constructor
         ClapTrap& operator=(const ClapTrap &); //copy assignment
-        ~ClapTrap();
         bool operator!=(ClapTrap const& );
+        ~ClapTrap();
+        
         void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);

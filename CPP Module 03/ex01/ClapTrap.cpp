@@ -2,23 +2,23 @@
 
 ClapTrap::ClapTrap() : m_name("noName"), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)
 {
-    std::cout << "\33[1;32mDefault constructor called for \33[0;m" << m_name << std::endl;
+    std::cout << "\33[1;32mDefault constructor called for ClapTrap \33[0;m" << m_name << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : m_name(name), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)
 {
-    std::cout << "\33[1;32mParameter constructor called for \33[0;m" << m_name << std::endl;
+    std::cout << "\33[1;32mParameter constructor called for ClapTrap \33[0;m" << m_name << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "\33[1;31mDestructor called for \33[0;m" << m_name << std::endl;
+    std::cout << "\33[1;31mDestructor called for ClapTrap \33[0;m" << m_name << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &toCopy) //copy constructor
 {
     *this = toCopy;
-    std::cout << "Copy constructor called for " << m_name << std::endl;
+    std::cout << "Copy constructor called for ClapTrap " << m_name << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &toCopy) //copy assignment
@@ -30,7 +30,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &toCopy) //copy assignment
         this->m_energyPoints = toCopy.m_energyPoints;
         this->m_attackDamage = toCopy.m_attackDamage;
     }
-    std::cout << "Copy assignment operator called for " << m_name << std::endl;
+    std::cout << "Copy assignment operator called for ClapTrap" << m_name << std::endl;
 	return (*this);
 }
 
@@ -60,7 +60,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     if (m_hitPoints <= amount)
     {
         m_hitPoints = 0;
-        std::cout << m_name << "\33[1;31m was killed!\033[0m" << std::endl;
+        std::cout << "ClapTrap " << m_name << "\33[1;31m was killed!\033[0m" << std::endl;
 		return ;
     }
     m_hitPoints -= amount;
@@ -69,8 +69,14 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    std::cout << "\33[1;34mClapTrap \033[0m" << m_name << "\33[1;34m got repaired by " << amount << " points!" << std::endl;
+    if (!m_energyPoints)
+    {
+        std::cout << "\33[1;34mClapTrap \033[0m" << m_name << "\33[1;34m has no energy points to repair!" << std::endl;
+        return ;
+    }
+    m_hitPoints += amount;
     --m_energyPoints;
+    std::cout << "\33[1;34mClapTrap \033[0m" << m_name << "\33[1;34m got repaired by " << amount << " points!" << std::endl;
 }
 // std::string ClapTrap::getName(void) const { return (m_name); }
 // void ClapTrap::setName(std::string const name) { m_name = name; }

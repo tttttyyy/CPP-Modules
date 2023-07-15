@@ -20,7 +20,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 FragTrap::FragTrap(const FragTrap& toCopy)
 {
     *this = toCopy;
-    std::cout << "Copy constructor called for " << m_name << std::endl;
+    std::cout << "Copy constructor called for FragTrap " << m_name << std::endl;
 }
 
 FragTrap::~FragTrap()
