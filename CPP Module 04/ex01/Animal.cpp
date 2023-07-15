@@ -16,12 +16,13 @@ Animal& Animal::operator=(const Animal& toCopy)
 {
     if (this != &toCopy)
         m_type = toCopy.m_type;
+    std::cout << "Copy assignment called for " << m_type << std::endl;
     return (*this);
 }
 
 Animal::~Animal()
 {
-    std::cout << "\33[1;31mDestructor called for Animal \33[0;m" << std::endl;
+    std::cout << "\33[1;31mDestructor called for\33[0;m" << m_type << std::endl;
 }
 
 void Animal::makeSound() const

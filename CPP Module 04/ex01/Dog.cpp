@@ -3,24 +3,35 @@
 Dog::Dog()
 {
     m_type = "Dog";
+    m_brain = new Brain();
     std::cout << "\33[1;32mDefault constructor called for \33[0;m" << m_type << std::endl;
 }
 
 Dog::Dog(const Dog& toCopy)
 {
-    *this = toCopy;
+    m_brain = new Brain(*toCopy.m_brain);
+    m_type = toCopy.m_type;
     std::cout << "Copy constructor called for " << m_type << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& toCopy)
 {
     if (this != &toCopy)
+    {
         m_type = toCopy.m_type;
+        delete m_brain;
+        m_brain = new Brain(*toCopy.m_brain);
+        for(int i = 0; i < 100; i++)
+            m_brain->setIdea(i, toCopy.m_brain->getIdea(i));
+        m_type = toCopy.m_type;
+    }
+    std::cout << "Copy assignment called for " << m_type << std::endl;
     return(*this);
 }
 
 Dog::~Dog()
 {
+    delete m_brain;
     std::cout << "\33[1;31mDestructor called for \33[0;m" << m_type << std::endl;
 }
 
