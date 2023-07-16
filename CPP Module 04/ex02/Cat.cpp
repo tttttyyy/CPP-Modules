@@ -1,20 +1,20 @@
-#include "Dog.hpp"
+#include "Cat.hpp"
 
-Dog::Dog()
+Cat::Cat()
 {
-    m_type = "Dog";
+    m_type = "Cat";
     m_brain = new Brain();
     std::cout << "\33[1;32mDefault constructor called for \33[0;m" << m_type << std::endl;
 }
 
-Dog::Dog(const Dog& toCopy)
+Cat::Cat(const Cat& toCopy)
 {
     m_brain = new Brain(*toCopy.m_brain);
     m_type = toCopy.m_type;
     std::cout << "Copy constructor called for " << m_type << std::endl;
 }
 
-Dog& Dog::operator=(const Dog& toCopy)
+Cat& Cat::operator=(const Cat& toCopy)
 {
     if (this != &toCopy)
     {
@@ -27,13 +27,13 @@ Dog& Dog::operator=(const Dog& toCopy)
     return(*this);
 }
 
-Dog::~Dog()
+Cat::~Cat()
 {
     delete m_brain;
     std::cout << "\33[1;31mDestructor called for \33[0;m" << m_type << std::endl;
 }
 
-void Dog::makeSound() const
+void Cat::makeSound() const
 {
-    std::cout << m_type << "\33[1;29m says Woof Woof\33[1;29m" << std::endl;
+    std::cout << m_type << "\33[1;29m says Meow Meow\33[1;29m" << std::endl;
 }
