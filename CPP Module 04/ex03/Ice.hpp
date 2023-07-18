@@ -1,6 +1,8 @@
 #ifndef ICE_HPP
 #define ICE_HPP
 
+#include "AMateria.hpp"
+
 class Ice : public AMateria
 {
     public:
@@ -9,7 +11,7 @@ class Ice : public AMateria
         Ice& operator=(const Ice& );
         ~Ice();
         
-        AMateria* clone() const; // or ice* return type 
+        Ice* clone() const; // or ice* return type 
         void use(ICharacter& target);
 };
 
