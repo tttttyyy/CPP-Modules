@@ -14,7 +14,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
     m_hitPoints = 100;
     m_energyPoints = 100;
     m_attackDamage = 30;
-    std::cout << "\33[1;32mDefault constructor called for FragTrap \33[0;m" << m_name << std::endl;
+    std::cout << "\33[1;32mParameter constructor called for FragTrap \33[0;m" << m_name << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap& toCopy)

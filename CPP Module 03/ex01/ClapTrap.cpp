@@ -78,11 +78,3 @@ void ClapTrap::beRepaired(unsigned int amount)
     --m_energyPoints;
     std::cout << "\33[1;34mClapTrap \033[0m" << m_name << "\33[1;34m got repaired by " << amount << " points!" << std::endl;
 }
-// std::string ClapTrap::getName(void) const { return (m_name); }
-// void ClapTrap::setName(std::string const name) { m_name = name; }
-// int ClapTrap::getHit(void) const { return (m_hitPoints); }
-// void ClapTrap::setHit(int const hitPoints) { m_hitPoints = hitPoints; }
-// int ClapTrap::getEnergy(void) const { return (m_energyPoints); }
-// void ClapTrap::setEnergy(int const energyPoints) { m_energyPoints = energyPoints; }
-// int ClapTrap::getAttack(void) const { return (m_attackDamage); }
-// void ClapTrap::setAttack(int const attackDamage) { m_attackDamage = attackDamage; }

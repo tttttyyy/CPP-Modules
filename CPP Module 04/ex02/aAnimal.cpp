@@ -25,9 +25,4 @@ aAnimal::~aAnimal()
     std::cout << "\33[1;31mDestructor called for aAnimal\33[0;m" << std::endl;
 }
 
-void aAnimal::makeSound() const
-{
-    std::cout << "\33[1;29maAnimal makes aanimal-like sounds\33[1;29m" << std::endl;
-}
-
 std::string aAnimal::getType( void ) const { return(m_type); }
