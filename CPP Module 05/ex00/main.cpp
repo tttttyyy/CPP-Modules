@@ -14,7 +14,7 @@ int main()
 		std::cout << par << std::endl;
 	}
 	catch(std::exception &e)
-	{
+	{  
 		std::cout << e.what() << std::endl;
 	}
 }
