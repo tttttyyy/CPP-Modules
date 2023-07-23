@@ -8,12 +8,10 @@
 int main()
 {
     IMateriaSource* src = new MateriaSource();
-    (void)src;
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
 
     ICharacter* me = new Character("me");
-    (void)me;
     AMateria* tmp;
 
     tmp = src->createMateria("ice");
@@ -29,5 +27,6 @@ int main()
     delete bob;
     delete me;
     delete src;
+	// system("leaks Interface");
     return 0;
 }

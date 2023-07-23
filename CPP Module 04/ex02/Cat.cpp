@@ -21,7 +21,6 @@ Cat& Cat::operator=(const Cat& toCopy)
         m_type = toCopy.m_type;
         delete m_brain;
         m_brain = new Brain(*toCopy.m_brain);
-        m_type = toCopy.m_type;
     }
     std::cout << "Copy assignment called for " << m_type << std::endl;
     return(*this);

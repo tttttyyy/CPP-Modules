@@ -18,7 +18,7 @@ ClapTrap::~ClapTrap()
 ClapTrap::ClapTrap(const ClapTrap &toCopy) //copy constructor
 {
     *this = toCopy;
-    std::cout << "Copy constructor called for ClapTrap" << m_name << std::endl;
+    std::cout << "Copy constructor called for ClapTra " << m_name << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &toCopy) //copy assignment

@@ -1,6 +1,6 @@
 NAME = Interface
 CXX = c++
-CXXFLAGS =   -std=c++98 #-Wshadow -Wno-shadow -Wall -Werror -Wextra
+CXXFLAGS =   -std=c++98 -Wall -Werror -Wextra
 SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
 RM = rm -rf

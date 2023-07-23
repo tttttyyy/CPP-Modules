@@ -2,7 +2,7 @@
 
 ClapTrap::ClapTrap() : m_name("noName"), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)
 {
-    std::cout << "\33[1;32mDefault constructor called for \33[0;m" << m_name << std::endl;
+    std::cout << "\33[1;32mDefault constructor called for ClapTrap \33[0;m" << m_name << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : m_name(name), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)

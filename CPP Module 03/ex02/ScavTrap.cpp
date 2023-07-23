@@ -37,6 +37,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& toCopy)
         m_energyPoints = toCopy.m_energyPoints;
         m_attackDamage = toCopy.m_attackDamage;
     }
+	std::cout << "Copy assignment operator called for ScavTrap " << m_name << std::endl;
     return(*this);
 }
 

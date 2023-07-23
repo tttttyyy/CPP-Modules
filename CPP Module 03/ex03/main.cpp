@@ -2,10 +2,10 @@
 int main()
 {
 	DiamondTrap frank("Frank");
-	ScavTrap scav("SSSS");
+	// ScavTrap scav("SSSS");
 
     // Call member functions to test
-    scav.attack("heyyy");
+    // scav.attack("heyyy");
     frank.attack("enemy");
     frank.takeDamage(50);
     frank.beRepaired(15);

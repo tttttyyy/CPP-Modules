@@ -1,13 +1,13 @@
-NAME = Brain
+NAME = Exception
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra  -std=c++98 #-Wshadow -Wno-shadow
+CXXFLAGS =   -std=c++98 -Wall -Werror -Wextra #should change the headers
 SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
 RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJS) 
+$(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:

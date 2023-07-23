@@ -26,7 +26,7 @@ int main()
         beta->makeSound();
         delete beta;
         delete a;
-    system("leaks Animal");
+    // system("leaks Animal");
     }
     return 0;
 }

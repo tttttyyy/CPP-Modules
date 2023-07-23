@@ -19,6 +19,7 @@ Character::Character( std::string const & name) : m_name(name)
 
 Character::Character( const Character& toCopy ) : m_name(toCopy.m_name)
 {
+	// std::cout << "Called Character's copy constructor\n";
     for (int i = 0; i < 4; i++)
     {
         if (toCopy.array[i])
@@ -30,8 +31,25 @@ Character::Character( const Character& toCopy ) : m_name(toCopy.m_name)
 
 Character&  Character::operator=( const Character& toCopy )
 {
+	// std::cout << "Called Character's copy assigment constructor\n";
     if (this != &toCopy)
     {
+		for(int i = 0; i < 4; ++i)
+    	{
+			if (array[i])
+			{
+    	    	delete array[i];
+    	    	array[i] = NULL;
+			}
+    	}
+		for(int i = 0; i < 4; ++i)
+    	{
+			if (floor[i])
+			{
+    	    	delete floor[i];
+    	    	floor[i] = NULL;
+			}
+    	}
         m_name = toCopy.m_name;
         for (int i = 0; i < 4; i++)
         {
@@ -44,9 +62,27 @@ Character&  Character::operator=( const Character& toCopy )
     return (*this);
 }
 
-Character::~Character() { /*delete [] array;*/ }
+Character::~Character()
+{
+	for(int i = 0; i < 4; ++i)
+    {
+		if (array[i])
+		{
+        	delete array[i];
+        	array[i] = NULL;
+		}
+    }
+	for(int i = 0; i < 4; ++i)
+    {
+		if (floor[i])
+		{
+        	delete floor[i];
+        	floor[i] = NULL;
+		}
+    }
+}
 
-std::string const & Character::getName() const { return (m_name); } //not sure think it's pointer
+std::string const & Character::getName() const { return (m_name); } 
 
 void Character::equip(AMateria* m)
 {
@@ -68,6 +104,7 @@ void Character::unequip(int idx)
         if (!array[idx])
         {
             std::cout << "[ERROR] No Materia in such index !" << std::endl;
+			return;
         }
         for (int i = 0; i < 4; i++)
         {

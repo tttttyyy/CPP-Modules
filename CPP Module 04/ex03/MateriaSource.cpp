@@ -36,8 +36,11 @@ MateriaSource::~MateriaSource()
 {
     for(int i = 0; i < 4; ++i)
     {
-        delete array[i];
-        array[i] = NULL;
+		if (array[i])
+		{
+        	delete array[i];
+        	array[i] = NULL;
+		}
     }
 }
 

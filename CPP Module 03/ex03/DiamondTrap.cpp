@@ -34,6 +34,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& toCopy)
         m_energyPoints = toCopy.m_energyPoints;
         m_attackDamage = toCopy.m_attackDamage;
     }
+	std::cout << "Copy assignment operator called for DiamondTrap " << m_name << std::endl;
     return(*this);
 }
 
