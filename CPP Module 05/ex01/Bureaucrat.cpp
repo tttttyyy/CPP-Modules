@@ -47,6 +47,11 @@ void Bureaucrat::decrement()
 
 }
 
+// void Bureaucrat::signForm()
+// {
+
+// }
+
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& output)
 {
     os << output.getName() << ", bureaucrat grade " << output.getGrade();
