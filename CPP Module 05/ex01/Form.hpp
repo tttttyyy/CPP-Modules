@@ -2,7 +2,10 @@
 #define FORM_HPP
 
 #include <exception>
+#include <iomanip>
 #include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -18,7 +21,7 @@ class Form
 		int			getGradeSign() const;
 		int			getGradeExecute() const;
 
-		void		beSigned(Bureaucrat);
+		void		beSigned(const Bureaucrat &);
 	private:
 		const std::string	m_name;
 		bool				m_sign;

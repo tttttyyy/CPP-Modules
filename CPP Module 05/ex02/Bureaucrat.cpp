@@ -47,7 +47,7 @@ void Bureaucrat::decrement()
 
 }
 
-void Bureaucrat::signForm(Form & f) //taking const reference because
+void Bureaucrat::signForm(AForm & f) //taking const reference because
 {										  //it's faster also no need for tmp
 	try
 	{

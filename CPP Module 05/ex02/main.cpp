@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "AForm.hpp"
 
 int main()
 {
@@ -7,21 +8,22 @@ int main()
 	{
 		Bureaucrat	def;
 		Bureaucrat	par("cute", 142);
-		Form		paper;
-		Form		doc("Document", 140, 10);
+
+		// AForm		paper;
+		// AForm		doc("Document", 140, 10);
 
 		std::cout << def << std::endl;
 		std::cout << par << std::endl;
-		std::cout << doc << std::endl;
+		// std::cout << doc << std::endl;
 
 		def.increment();
 		par.decrement();
 		// doc.beSigned(par);
-		par.signForm(doc);
+		// par.signForm(doc);
 
 		std::cout << def << std::endl;
 		std::cout << par << std::endl;
-		std::cout << doc << std::endl;
+		// std::cout << doc << std::endl;
 	}
 	catch(std::exception &e)
 	{

@@ -50,15 +50,15 @@ const char* Form::GradeTooLowException::what() const throw()
 
 std::ostream& operator<<(std::ostream& os, const Form &output)
 {
-	os << output.getName() << ", form info" << std::endl;
-	os << "Sign " << output.getSign() << std::endl;;
-	os << "Grade(Sign) " << output.getGradeSign() << std::endl;;
-	os << "Grade(Execute) " << output.getGradeExecute() << std::endl;;
+	os << output.getName() << "\33[1;34m, form info\033[0m" << std::endl;
+	os << std::setw(15) << "Sign " << ": " << output.getSign() << std::endl;;
+	os << std::setw(15) << "Grade(Sign) " << ": " << output.getGradeSign() << std::endl;;
+	os << std::setw(15) << "Grade(Execute) " << ": " << output.getGradeExecute() << std::endl;;
 	return (os);
 }
 
-void Form::beSigned(Bureaucrat fatty) //maybe with referance
-{
+void Form::beSigned(const Bureaucrat & fatty) //taking const reference because
+{									  //it's faster also no need for tmp
 	if (fatty.getGrade() <= m_gradeSign)
 		m_sign = true;
 	else
