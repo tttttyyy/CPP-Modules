@@ -1,7 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : m_name("noName"), m_grade(10)
-{}
+Bureaucrat::Bureaucrat() : m_name("noName"), m_grade(10) {}
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : m_name(name)
 {
@@ -12,21 +11,19 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : m_name(name)
 	m_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat & toCopy) : m_name(toCopy.m_name), m_grade(toCopy.m_grade)
-{}
+Bureaucrat::Bureaucrat(const Bureaucrat & toCopy) : m_name(toCopy.m_name), m_grade(toCopy.m_grade) {}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat & toCopy)
 {
 	if (this != &toCopy)
 	{
-		// m_name = toCopy.m_name;
+		// const_cast<std::string&>(m_name) = toCopy.m_name; //as it is constant no need to reassign
 		m_grade = toCopy.m_grade;
 	}
 	return (*this);
 }
 
-Bureaucrat::~Bureaucrat()
-{}
+Bureaucrat::~Bureaucrat() {}
 
 std::string Bureaucrat::getName()const { return(m_name); }
 
@@ -55,10 +52,10 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& output)
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("[ERROR] The number is too high !");
+	return ("\33[1;31m[ERROR] The number is too high !\033[0m");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("[ERROR] The number is too low !");
+	return ("\33[1;31m[ERROR] The number is too low !\033[0m");
 }

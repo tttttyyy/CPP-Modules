@@ -6,7 +6,6 @@
 #include <fstream>
 #include "Bureaucrat.hpp"
 
-
 class Bureaucrat;
 
 class AForm
@@ -25,6 +24,12 @@ class AForm
 
 		void			beSigned(const Bureaucrat &);
 		virtual void	execute(Bureaucrat const & executor) const = 0;
+	private:
+		const std::string	m_name;
+		bool				m_sign;
+		const int			m_gradeSign;
+		const int			m_gradeExecute;
+	protected:
 		class GradeTooHighException : public std::exception
 		{
 			const char* what() const throw();
@@ -33,11 +38,10 @@ class AForm
 		{
 			const char* what() const throw();
 		};
-	private:
-		const std::string	m_name;
-		bool				m_sign;
-		const int			m_gradeSign;
-		const int			m_gradeExecute;
+		class SignException : public std::exception
+        {
+            const char* what(void) const throw();
+        };
 };
 
 std::ostream& operator<<(std::ostream&, const AForm &);

@@ -40,20 +40,29 @@ int AForm::getGradeExecute() const { return(m_gradeExecute); }
 
 const char* AForm::GradeTooHighException::what() const throw()
 {
-	return ("[ERROR] The grade is too high !");
+	return ("\33[1;31m[ERROR] The grade is too high !\033[0m");
 }
 
 const char* AForm::GradeTooLowException::what() const throw()
 {
-	return ("[ERROR] The grade is too low !");
+	return ("\33[1;31m[ERROR] The grade is too low !\033[0m");
+}
+
+const char* AForm::SignException::what(void) const throw()
+{
+	return ("\33[1;31m[ERROR] The form is not signed !\033[0m");
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm &output)
 {
 	os << output.getName() << "\33[1;34m, Aform info\033[0m" << std::endl;
-	os << std::setw(15) << "Sign " << ": " << output.getSign() << std::endl;;
-	os << std::setw(15) << "Grade(Sign) " << ": " << output.getGradeSign() << std::endl;;
-	os << std::setw(15) << "Grade(Execute) " << ": " << output.getGradeExecute() << std::endl;;
+	os << std::setw(15) << "Sign " << ": " << std::endl;
+	if (output.getSign)
+		os << "\33[1;32mPositive\033[0m" << std::endl;
+	else
+		os << "\33[1;31mNegative\033[0m" << std::endl;
+	os << std::setw(15) << "Grade(Sign) " << ": " << output.getGradeSign() << std::endl;
+	os << std::setw(15) << "Grade(Execute) " << ": " << output.getGradeExecute() << std::endl;
 	return (os);
 }
 

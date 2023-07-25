@@ -27,8 +27,7 @@ Form& Form::operator=(const Form & toCopy )
 	return (*this);
 }
 
-Form::~Form()
-{}
+Form::~Form() {}
 
 std::string	Form::getName() const { return(m_name); }
 
@@ -40,27 +39,30 @@ int Form::getGradeExecute() const { return(m_gradeExecute); }
 
 const char* Form::GradeTooHighException::what() const throw()
 {
-	return ("[ERROR] The grade is too high !");
+	return ("\33[1;31m[ERROR] The grade is too high !\033[0m");
 }
 
 const char* Form::GradeTooLowException::what() const throw()
 {
-	return ("[ERROR] The grade is too low !");
+	return ("\33[1;31m[ERROR] The grade is too low !\033[0m");
 }
 
 std::ostream& operator<<(std::ostream& os, const Form &output)
 {
 	os << output.getName() << "\33[1;34m, form info\033[0m" << std::endl;
-	os << std::setw(15) << "Sign " << ": " << output.getSign() << std::endl;;
-	os << std::setw(15) << "Grade(Sign) " << ": " << output.getGradeSign() << std::endl;;
-	os << std::setw(15) << "Grade(Execute) " << ": " << output.getGradeExecute() << std::endl;;
+	os << std::setw(15) << "Sign " << ": " << std::endl;
+	if (output.getSign)
+		os << "\33[1;32mPositive\033[0m" << std::endl;
+	else
+		os << "\33[1;31mNegative\033[0m" << std::endl;
+	os << std::setw(15) << "Grade(Sign) " << ": " << output.getGradeSign() << std::endl;
+	os << std::setw(15) << "Grade(Execute) " << ": " << output.getGradeExecute() << std::endl;
 	return (os);
 }
 
 void Form::beSigned(const Bureaucrat & fatty) //taking const reference because
-{									  //it's faster also no need for tmp
-	if (fatty.getGrade() <= m_gradeSign)
-		m_sign = true;
-	else
+{									  			//it's faster also no need for tmp
+	if (fatty.getGrade() > m_gradeSign)
 		throw GradeTooLowException();
+	m_sign = true;
 }
