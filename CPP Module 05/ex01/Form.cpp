@@ -50,8 +50,8 @@ const char* Form::GradeTooLowException::what() const throw()
 std::ostream& operator<<(std::ostream& os, const Form &output)
 {
 	os << output.getName() << "\33[1;34m, form info\033[0m" << std::endl;
-	os << std::setw(15) << "Sign " << ": " << std::endl;
-	if (output.getSign)
+	os << std::setw(15) << "Sign " << ": ";
+	if (output.getSign())
 		os << "\33[1;32mPositive\033[0m" << std::endl;
 	else
 		os << "\33[1;31mNegative\033[0m" << std::endl;

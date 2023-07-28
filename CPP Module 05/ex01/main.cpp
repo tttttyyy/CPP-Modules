@@ -6,7 +6,7 @@ int main()
 	try
 	{
 		Bureaucrat	def;
-		Bureaucrat	par("cute", 142);
+		Bureaucrat	par("cute", 138);
 		Form		paper;
 		Form		doc("Document", 140, 10);
 
@@ -16,7 +16,7 @@ int main()
 
 		def.increment();
 		par.decrement();
-		// doc.beSigned(par);
+		doc.beSigned(par);
 		par.signForm(doc);
 
 		std::cout << def << std::endl;

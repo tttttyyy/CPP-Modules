@@ -11,6 +11,8 @@ int main()
 		Intern someRandomIntern;
 		AForm* rrf;
 		rrf = someRandomIntern.makeForm("robotomy", "Bender");
+		// rrf = someRandomIntern.makeForm("shrubbery", "Bender");
+		// rrf = someRandomIntern.makeForm("presidental", "Bender");
 	}
 	catch(std::exception &e)
 	{

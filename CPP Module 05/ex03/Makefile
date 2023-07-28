@@ -1,4 +1,4 @@
-NAME = Form
+NAME = Intern
 CXX = c++
 CXXFLAGS =   -std=c++98 -Wall -Werror -Wextra #should change the headers
 SRCS = $(wildcard *.cpp)

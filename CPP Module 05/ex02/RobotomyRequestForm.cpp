@@ -17,11 +17,12 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
+	std::srand(time(0));
 	if (executor.getGrade() > getGradeExecute())
 		throw AForm::GradeTooLowException();
 	if (!getSign())
 		throw AForm::SignException();
-	std::cout << m_target << "\33[1;36mMakes some drilling noises\033[0m" << std::endl;
+	std::cout << m_target << "\33[1;36m makes some drilling noises\033[0m" << std::endl;
 	if (std::rand() % 2)
 		std::cout << m_target << "\33[1;32m has been robotomized successfully\033[0m" << std::endl;
 	else

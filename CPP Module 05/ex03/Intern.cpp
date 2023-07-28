@@ -23,7 +23,6 @@ const char* Intern::NameExistenceException::what(void) const throw()
 AForm* Intern::makeForm(const std::string &formName, const std::string &formTarget)
 {
 	std::string names[3] = {"shrubbery", "robotomy", "presidental"};
-	// int i = 0 * (formName == names[0]) + 1 * (formName == names[1]) + 2 * (formName == names[2]);
 	int i = -1;
 	while (formName != names[++i])
 	;
