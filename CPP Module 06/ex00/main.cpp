@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 		else
 			ScalarConverter::convert(argv[1]);
 	}
-	catch(const std::exception &e)
+	catch(std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}

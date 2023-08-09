@@ -44,12 +44,32 @@ void toInt(double d, std::string av)
 
 }
 
-int	checkInf()
+int	ScalarConverter::checkInf()
 {
-	// if (m_argv == "nan" || argv == "nanf")
-	// else if (m_argv == "inf" || argv == "inff")
-	// else if (m_argv == "-inf" || argv == "-inff")
-	return (1);
+	if (m_argv == "nan" || m_argv == "nanf")
+	{
+		std::cout << "char: impossible" << std::endl
+				  << "int: impossible" << std::endl
+				  << "float: nanf" << std::endl
+				  << "double: nan" << std::endl;
+	}
+	else if (m_argv == "inf" || m_argv == "inff")
+	{
+		std::cout << "char: impossible" << std::endl
+				  << "int: impossible" << std::endl
+				  << "float: inff" << std::endl
+				  << "double: inf" << std::endl;
+	}
+	else if (m_argv == "-inf" || m_argv == "-inff")
+	{
+		std::cout << "char: impossible" << std::endl
+				  << "int: impossible" << std::endl
+				  << "float: -inff" << std::endl
+				  << "double: -inf" << std::endl;
+	}
+	else
+		return (1);
+	return (0);
 }
 
 void ScalarConverter::convert(char *ob)
@@ -60,7 +80,6 @@ void ScalarConverter::convert(char *ob)
 	m_argv = ob;
 	m_literal = std::strtod(ob, &null);
 	// std::cout << m_literal;
-	// 	std::cout << "kukuuuu" << std::endl;
 	if (checkInf())
 	{
 		throw unknownTypeException();
