@@ -2,6 +2,7 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <exception>
 // #include <stdlib> 
 
 class ScalarConverter
@@ -14,10 +15,17 @@ class ScalarConverter
 		ScalarConverter& operator=(const ScalarConverter &);
 		~ScalarConverter();
 
-		char	m_char;
-		int		m_int;
-		float	m_float;
-		double	m_double;
+		static char			m_char;
+		static int			m_int;
+		static float		m_float;
+		static double		m_double;
+		static double		m_literal;
+		static std::string	m_argv;
+		
+	class unknownTypeException : std::exception
+	{
+		const char* what() const throw();
+	};
 };
 
 #endif
