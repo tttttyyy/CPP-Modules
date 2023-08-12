@@ -3,12 +3,16 @@
 
 #include <iostream>
 #include <exception>
+#include <cctype>
+
 // #include <stdlib> 
 
 class ScalarConverter
 {
 	public:
-		static void convert(char* );
+		static void printChar();
+		static void castChar();
+		static void convert(char*);
 		static int	checkInf();
 
 	private:

@@ -22,14 +22,30 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter &toCopy)
 
 ScalarConverter::~ScalarConverter() {}
 
-void toChar(double d)
+void ScalarConverter::castChar()
 {
-	if (d <= 32 || d == 127)
-		std::cout << "Non displayable" << std::endl;
-	else if (d > 32 && d < 127)
-		std::cout << char(d) << std::endl;
+	if (m_argv.size() == 1)
+	{
+		m_char = m_argv[0];
+		m_double = static_cast<double>(m_argv[0]);
+		m_int = static_cast<int>(m_argv[0]);
+		m_float = static_cast<float>(m_argv[0]);
+	}
+}
+
+
+void ScalarConverter::printChar()
+{
+	if(std::isprint(m_char))
+		std::cout << m_char << std::endl;
 	else
-		std::cout << "impossible" << std::endl;
+		std::cout << "Not displayable" << std::endl;
+
+	// if (d <= 32 || d == 127)
+	// else if (d > 32 && d < 127)
+	// 	std::cout << char(d) << std::endl;
+	// else
+	// 	std::cout << "impossible" << std::endl;
 }
 
 void toInt(double d, std::string av)
@@ -68,8 +84,8 @@ int	ScalarConverter::checkInf()
 				  << "double: -inf" << std::endl;
 	}
 	else
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 void ScalarConverter::convert(char *ob)
@@ -79,8 +95,14 @@ void ScalarConverter::convert(char *ob)
 	char *null = NULL;
 	m_argv = ob;
 	m_literal = std::strtod(ob, &null);
-	// std::cout << m_literal;
 	if (checkInf())
+		;
+	else if (!m_literal && ob[0] != '0' && m_argv.size() == 1)
+	{
+		castChar();
+		printChar();
+	}
+	else
 	{
 		throw unknownTypeException();
 	}
