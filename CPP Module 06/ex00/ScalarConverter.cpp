@@ -88,6 +88,13 @@ int	ScalarConverter::checkInf()
 	return (1);
 }
 
+bool ScalarConverter::isNumber(const char *ob, const char *null)
+{
+	if (null != ob && (*null == '\0'))
+	;
+	return (false);
+}
+
 void ScalarConverter::convert(char *ob)
 {
 	if (!ob)
@@ -101,6 +108,10 @@ void ScalarConverter::convert(char *ob)
 	{
 		castChar();
 		printChar();
+	}
+	else if (isNumber(ob, null))
+	{
+		std::cout << "hihi" << std::endl;
 	}
 	else
 	{

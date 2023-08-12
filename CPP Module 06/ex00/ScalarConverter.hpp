@@ -10,6 +10,7 @@
 class ScalarConverter
 {
 	public:
+		static bool isNumber(const char*, const char*);
 		static void printChar();
 		static void castChar();
 		static void convert(char*);
