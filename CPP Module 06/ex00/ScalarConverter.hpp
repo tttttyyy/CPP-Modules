@@ -4,6 +4,7 @@
 #include <iostream>
 #include <exception>
 #include <cctype>
+#include <iomanip>
 
 // #include <stdlib> 
 
@@ -11,10 +12,13 @@ class ScalarConverter
 {
 	public:
 		static bool isNumber(const char*, const char*);
-		static void printChar();
+		static bool isInt();
+		static bool isDouble();
+		static bool isFloat();
+		static void print();
 		static void castChar();
 		static void convert(char*);
-		static int	checkInf();
+		static bool	checkInf();
 
 	private:
 		ScalarConverter();
