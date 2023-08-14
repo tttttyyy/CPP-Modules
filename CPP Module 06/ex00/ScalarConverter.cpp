@@ -42,9 +42,16 @@ void ScalarConverter::print()
 		std::cout << std::setw(15) <<  "Not displayable" << std::endl;
 	std::cout << "int: " << std::setw(2) << m_int << std::endl;
 	std::cout << "float: ";
-	// 	std::cout << char(d) << std::endl;
-	// else
-	// 	std::cout << "impossible" << std::endl;
+	if (m_argv.find('.') == std::string::npos || m_literal == floor(m_literal))
+		std::cout << m_float << ".0f" << std::endl;
+	else
+		std::cout << m_float << "f" << std::endl;
+	std::cout << "double: ";
+	if (m_argv.find('.') == std::string::npos || m_literal == floor(m_literal))
+		std::cout << m_float << ".0" << std::endl;
+	else
+		std::cout << m_float << std::endl;
+
 }
 
 bool ScalarConverter::isInt()

@@ -5,6 +5,7 @@
 #include <exception>
 #include <cctype>
 #include <iomanip>
+#include <cmath>
 
 // #include <stdlib> 
 
