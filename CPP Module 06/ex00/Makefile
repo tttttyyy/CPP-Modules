@@ -1,4 +1,4 @@
-NAME = Cast
+NAME = staticCast
 CXX = c++
 CXXFLAGS =  -I. -std=c++98 -Wall -Werror -Wextra -MMD -MP
 SRCS = $(wildcard *.cpp)

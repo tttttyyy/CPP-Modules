@@ -11,11 +11,26 @@ ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter &toCopy)
 {
-	*this = toCopy;
+	// m_char = toCopy.m_char;
+	// m_int = toCopy.m_int;
+	// m_float = toCopy.m_float;
+	// m_double = toCopy.m_double;
+	// m_literal = toCopy.m_literal;
+	// m_argv = toCopy.m_argv;
+	(void)toCopy;
 }
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter &toCopy)
 {
+	// if (this != &toCopy)
+	// {
+	// 	m_char = toCopy.m_char;
+	// 	m_int = toCopy.m_int;
+	// 	m_float = toCopy.m_float;
+	// 	m_double = toCopy.m_double;
+	// 	m_literal = toCopy.m_literal;
+	// 	m_argv = toCopy.m_argv;
+	// }
 	(void)toCopy;
 	return (*this);
 }
@@ -37,7 +52,7 @@ void ScalarConverter::print()
 {
 	std::cout << "char: ";
 	if(std::isprint(m_char))
-		std::cout << m_char << std::endl;
+		std::cout << "\'" << m_char << "\'" << std::endl;
 	else
 		std::cout << std::setw(15) <<  "Not displayable" << std::endl;
 	std::cout << "int: " << std::setw(2) << m_int << std::endl;
@@ -51,7 +66,6 @@ void ScalarConverter::print()
 		std::cout << m_float << ".0" << std::endl;
 	else
 		std::cout << m_float << std::endl;
-
 }
 
 bool ScalarConverter::isInt()
@@ -59,8 +73,8 @@ bool ScalarConverter::isInt()
 	if (m_argv.empty() || (!std::isdigit(m_argv[0]) && m_argv[0] != '-' && m_argv[0] != '+'))
 		return (false);
 	m_double = static_cast<double>(m_literal);
-	m_char = static_cast<char>(m_int);
 	m_int = static_cast<int>(m_literal);
+	m_char = static_cast<char>(m_int);
 	m_float = static_cast<float>(m_literal);
 	if (m_argv.find('.') != std::string::npos)
 		return (false);
