@@ -26,10 +26,12 @@ Array<T>& Array<T>::operator=(const Array& toCopy)
 	if (this != &toCopy)
 	{
 		delete m_elements;
+		m_size = toCopy.m_size;
 		m_elements = new T[m_size];
 		for(int i = 0; i < m_size; i++)
 			m_elements[i] = toCopy.m_elements[i];
 	}
+	return(*this);
 }
 
 template <typename T>
@@ -38,7 +40,7 @@ Array<T>::~Array() { delete [] m_elements; }
 template <typename T>
 T&	Array<T>::operator[](unsigned int index)
 {
-	return ((index > m_size) ? throw OutOfTheRangeException() : (*(m_elements +index)));
+	return ((index >= m_size) ? throw OutOfTheRangeException() : (*(m_elements +index)));
 }
 
 template <typename T>

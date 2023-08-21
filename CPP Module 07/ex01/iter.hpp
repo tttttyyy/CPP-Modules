@@ -11,6 +11,15 @@ template <typename arg, typename len> void iter(arg *p, len l, void (*f)(const a
 	for (len i = 0; i < l; i++)
 		f(p[i]);
 }
-
-
+class Awesome
+{
+public:
+Awesome( void ) : _n( 42 ) { return; }
+int get( void ) const { return this->_n; }
+private:
+int _n;
+};
+std::ostream & operator<<( std::ostream & o, Awesome const & rhs ) { o << rhs.get(); return o; }
+template< typename T >
+void print( T const & x ) { std::cout << x << std::endl; return; }
 #endif
