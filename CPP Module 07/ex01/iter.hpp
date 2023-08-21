@@ -12,4 +12,10 @@ template <typename arg> void iter(arg *p, int l, void (*f)(const arg &))
 		f(p[i]);
 }
 
+template <typename arg> void iter(arg *p, int l, void (*f)(arg &))
+{
+	for (int i = 0; i < l; i++)
+		f(p[i]);
+}
+
 #endif
