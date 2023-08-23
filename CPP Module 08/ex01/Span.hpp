@@ -8,7 +8,7 @@ class Span
 {
     public:
         Span();
-        Span(int);
+        Span(unsigned int);
         Span(const Span &);
         Span& operator=(const Span &);
         ~Span();
@@ -25,7 +25,8 @@ class Span
             const char* what() const throw();
         };
     private:
-        std::vector<int> m_arr;
+        std::vector<int>	m_arr;
+		unsigned int		m_size;
 };
 
 #endif
