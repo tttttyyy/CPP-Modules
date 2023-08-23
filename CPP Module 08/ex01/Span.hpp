@@ -2,6 +2,7 @@
 #define SPAN_HPP
 
 #include <iostream>
+#include <vector>
 
 class Span
 {
@@ -19,8 +20,12 @@ class Span
         {
             const char* what() const throw();
         };
+        class NoSpanCanBeFoundException : public std::exception
+        {
+            const char* what() const throw();
+        };
     private:
-        int *m_arr;
+        std::vector<int> m_arr;
 };
 
 #endif
