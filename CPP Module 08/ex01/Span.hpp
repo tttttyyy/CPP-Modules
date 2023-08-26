@@ -15,6 +15,16 @@ class Span
         ~Span();
 
         void    addNumber(int);
+		template<typename T>
+        void    addRange(const T begin, const T end)
+		{
+			if (begin - end > (T)m_size)
+				throw NoSpaceLeftException();
+			m_arr.insert(m_arr.end(), begin, end);
+			// std::vector<int>::iterator it;
+			// for (it = m_arr.begin(); it != m_arr.end(); it++)
+			// 	std::cout << *it << std::endl;
+		}
         int     shortestSpan();
         int     longestSpan();
         class NoSpaceLeftException : public std::exception

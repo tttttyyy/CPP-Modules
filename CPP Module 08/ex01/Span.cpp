@@ -43,7 +43,7 @@ int Span::longestSpan()
 	return(*(m_arr.end() - 1) - *(m_arr.begin()));
 }
 
-void    Span::addNumber(int num)
+void Span::addNumber(int num)
 {
 	if (m_size <= m_arr.size())
 		throw NoSpaceLeftException();
