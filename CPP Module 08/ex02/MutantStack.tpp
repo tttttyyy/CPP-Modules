@@ -1,13 +1,14 @@
-#include "Mutantstack.hpp"
+// #include "Mutantstack.hpp"
 
-MutantStack::MutantStack()
-{}
+// MutantStack<T, Container>::MutantStack() : std::stack<T, Container> {}
 
-MutantStack::MutantStack(Const Mutantstack &)
-{}
+// MutantStack<T, Container>::MutantStack<T, Container>(Const Mutantstack &toCopy)
+// {}
 
-MutantStack& MutantStack::operator=(Const Mutantstack &)
-{}
+// MutantStack<T, Container>& MutantStack<T, Container>::operator=(Const Mutantstack &toCopy)
+// {
+// 	return(*this);
+// }
 
-MutantStack::~MutantStack()
-{}
+// MutantStack<T, Container>::~MutantStack<T, Container>()
+// {}

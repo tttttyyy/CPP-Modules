@@ -2,17 +2,35 @@
 #define MUTANTSTACK_HPP
 
 #include <stack>
+#include <iostream>
 
-template <class T, class Container = deque<T> >
-class MutantStack : public std::stack<T, constainer>
+template <class T, class Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container>
 {
-	MutantStack();	
-	MutantStack(Const Mutantstack &);
-	MutantStack& operator=(Const Mutantstack &);
-	~MutantStack();
+	public:
+		MutantStack() : std::stack<T, Container>() {}
+		MutantStack<T, Container>(const MutantStack<T, Container> &toCopy)
+		{ *this = toCopy; }
+		MutantStack<T, Container>& operator=(const MutantStack<T, Container> &toCopy)
+		{
+			if(this != &toCopy)
+				this->c = toCopy.c;
+			return(*this);
+		}
+		~MutantStack<T, Container>();
 
-	typename Container::iterator it;
+		typedef typename Container::iterator iterator;
+		// typedef typename Container::iterator ite;
 
+		iterator begin()
+		{
+			return(this->c.begin());
+		}
+
+		iterator end()
+		{
+			return(this->c.end());
+		}
 };
 
 #endif
