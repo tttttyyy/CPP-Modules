@@ -2,6 +2,7 @@
 #define MUTANTSTACK_HPP
 
 #include <stack>
+#include <deque>
 #include <iostream>
 
 template <class T, class Container = std::deque<T> >
@@ -17,10 +18,11 @@ class MutantStack : public std::stack<T, Container>
 				this->c = toCopy.c;
 			return(*this);
 		}
-		~MutantStack<T, Container>();
+		~MutantStack<T, Container>() {}
+
 
 		typedef typename Container::iterator iterator;
-		// typedef typename Container::iterator ite;
+		typedef typename Container::iterator const_iterator;
 
 		iterator begin()
 		{
@@ -28,6 +30,16 @@ class MutantStack : public std::stack<T, Container>
 		}
 
 		iterator end()
+		{
+			return(this->c.end());
+		}
+
+		const_iterator begin() const
+		{
+			return(this->c.begin());
+		}
+
+		const_iterator end() const
 		{
 			return(this->c.end());
 		}
