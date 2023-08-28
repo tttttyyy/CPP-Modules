@@ -7,7 +7,7 @@ void easyfind(T container, int data)
 	it = std::find(container.begin(), container.end(), data);
 	if (it == container.end())
 		throw NoSuchDataMemberException();
-	std::cout << "Success!" << std::endl;
+	std::cout << "\33[1;32mSuccess!" << std::endl;
 }
 
 const char* NoSuchDataMemberException::what() const throw()
