@@ -52,10 +52,10 @@ void Span::addNumber(int num)
 
 const char* Span::NoSpaceLeftException::what() const throw()
 {
-	return("\33[1;31m[ERROR] No Space Left !");
+	return("\33[1;31m[ERROR] No Space Left !\33[0;m");
 }
 
 const char* Span::NoSpanCanBeFoundException::what() const throw()
 {
-	return("\33[1;31m[ERROR] No Span Can Be Found !");
+	return("\33[1;31m[ERROR] No Span Can Be Found !\33[0;m");
 }

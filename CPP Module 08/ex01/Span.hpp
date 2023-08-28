@@ -18,7 +18,10 @@ class Span
 		template<typename T>
         void    addRange(const T begin, const T end)
 		{
-			if (begin - end > (T)m_size)
+			int com = begin - end; 
+			if (com < 0)
+				com *= -1;
+			if (com >= (T)m_size)
 				throw NoSpaceLeftException();
 			m_arr.insert(m_arr.end(), begin, end);
 			// std::vector<int>::iterator it;
