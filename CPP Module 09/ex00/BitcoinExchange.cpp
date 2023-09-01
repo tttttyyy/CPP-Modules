@@ -1,0 +1,52 @@
+#include "BitcoinExchange.hpp"
+
+BitcoinExchange::BitcoinExchange()
+{}
+
+BitcoinExchange::BitcoinExchange(std::string filename) : m_filename(filename)
+{
+	std::ifstream	infile (filename);
+	if (!infile.is_open())
+	{
+		std::cerr << "\033[1;31m[ERROR] NO SUCH FILE !\033[0m" << std::endl;
+		exit(2);
+	}
+	std::string tmp;
+	if (!getline(infile, tmp, '\0'))
+	{
+		std::cerr << "\033[1;31m" << "[ERROR] FILE IS EMPTY !" << "\033[0m" << std::endl;
+		infile.close();
+		exit(2);
+	}
+	size_t			pos;
+	pos = tmp.find("\n");
+	while (pos != std::string::npos)
+		m_filedata.push()
+
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &toCopy)
+{(void)toCopy;}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &toCopy)
+{(void)toCopy; return(*this);}
+
+BitcoinExchange::~BitcoinExchange()
+{}
+
+
+
+
+// std::string		tmp;
+// 	size_t			index = 0;
+
+// 	std::ofstream outfile(m_filename + ".replace");
+// 	{
+// 		outfile << tmp.substr(index, pos - index);
+// 		outfile << s2;
+// 		index = pos + s1.length();
+// 		pos = tmp.find(s1, pos + s1.length() + 1);
+// 	}
+// 	outfile << tmp.substr(index);
+// 	outfile.close();
+// 	infile.close();
