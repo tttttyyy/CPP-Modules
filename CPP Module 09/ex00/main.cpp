@@ -9,4 +9,5 @@ int main(int argc, char **argv)
 		exit(2);
 	}
 	BitcoinExchange btc(argv[1]);
+	btc.exchange();
 }

@@ -2,7 +2,11 @@
 #define  BITCOINEXCHANGE_HPP
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
 #include <map>
 
 class BitcoinExchange
@@ -13,9 +17,13 @@ class BitcoinExchange
 		BitcoinExchange(const BitcoinExchange &);
 		BitcoinExchange& operator=(const BitcoinExchange &);
 		~BitcoinExchange();
+
+		void exchange();
+		void parseInput(std::string &);
+		void convertDate(std::string &);
+
 	private:
 		std::string m_filename;
-		std::vector<std::string> m_filedata;
 		std::map<unsigned int[3], float> database;
 		std::map<unsigned int[3], float> input;
 };
