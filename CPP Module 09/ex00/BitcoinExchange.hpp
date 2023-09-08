@@ -22,14 +22,14 @@ class BitcoinExchange
 
 		void exchange();
 		void parseInput(std::string &);
+		void parseDatabase(std::string &);
 		bool checkDate(std::string &);
 		bool valiDate(unsigned int date[3]);
 		std::pair<std::string, float> fittingRate(const std::pair<std::string, float> &);
 
 	private:
 		std::string m_filename;
-		std::map<std::string, float> database;
-		std::map<std::string, float> input;
+		std::map<std::string, float> m_database;
 };
 
 #endif

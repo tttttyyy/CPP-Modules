@@ -34,6 +34,33 @@ void BitcoinExchange::exchange()
 		parseInput(tmp);
 }
 
+void BitcoinExchange::parseDatabase(std::string &)
+{
+	std::ifstream	database ("data.csv");
+	if (!database.is_open())
+	{
+		std::cerr << "\033[1;31m[ERROR] NO SUCH FILE !\033[0m" << std::endl;
+		exit(2);
+	}
+	std::string tmp;
+	if (!getline(database, tmp))
+	{
+		std::cerr << "\033[1;31m[ERROR] FILE IS EMPTY !\033[0m" << std::endl;
+		database.close();
+		exit(2);
+	}
+	std::string date;
+	std::string value;
+	std::istringstream iss(tmp);
+	if (!(std::getline(iss, date, ',')))
+		return;
+	iss >> value;
+	float f = strtof(value.c_str(), NULL);
+	std::string tmp;
+	while (getline(database, tmp))
+	m_database.insert(std::make_pair(date, value));
+}
+
 void BitcoinExchange::parseInput(std::string &tmp)
 {
 	std::string date;
@@ -52,14 +79,14 @@ void BitcoinExchange::parseInput(std::string &tmp)
 		std::cerr << "Error: too large a number." << std::endl;
 	else
 	{
-		std::pair<std::string, float> curr = fittingRate();
-		input[date] = f;
+		std::pair<std::string, float> curr = matchingRate();
+		std::cout << date << " => " << f 
 	}
 }
 
 std::pair<std::string, float> BitcoinExchange::fittingRate(const std::pair<std::string, float> &input)
 {
-	
+
 }
 
 bool BitcoinExchange::checkDate(std::string &date)
