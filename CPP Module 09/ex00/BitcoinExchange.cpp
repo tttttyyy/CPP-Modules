@@ -25,7 +25,7 @@ void BitcoinExchange::exchange()
 	std::string tmp;
 	if (!getline(infile, tmp))
 	{
-		std::cerr << "\033[1;31m" << "[ERROR] FILE IS EMPTY !" << "\033[0m" << std::endl;
+		std::cerr << "\033[1;31m[ERROR] FILE IS EMPTY !\033[0m" << std::endl;
 		infile.close();
 		exit(2);
 	}
@@ -36,7 +36,6 @@ void BitcoinExchange::exchange()
 
 void BitcoinExchange::parseInput(std::string &tmp)
 {
-	// std::cout << tmp << std::endl;
 	std::string date;
 	std::string value;
 	std::istringstream iss(tmp);
@@ -52,7 +51,15 @@ void BitcoinExchange::parseInput(std::string &tmp)
 	else if (f > 1000)
 		std::cerr << "Error: too large a number." << std::endl;
 	else
+	{
+		std::pair<std::string, float> curr = fittingRate();
 		input[date] = f;
+	}
+}
+
+std::pair<std::string, float> BitcoinExchange::fittingRate(const std::pair<std::string, float> &input)
+{
+	
 }
 
 bool BitcoinExchange::checkDate(std::string &date)
