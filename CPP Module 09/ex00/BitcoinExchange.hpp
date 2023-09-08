@@ -5,9 +5,11 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
 #include <string>
 #include <vector>
 #include <map>
+// #include <exception>
 
 class BitcoinExchange
 {
@@ -20,12 +22,13 @@ class BitcoinExchange
 
 		void exchange();
 		void parseInput(std::string &);
-		void convertDate(std::string &);
+		bool checkDate(std::string &);
+		bool valiDate(unsigned int date[3]);
 
 	private:
 		std::string m_filename;
-		std::map<unsigned int[3], float> database;
-		std::map<unsigned int[3], float> input;
+		std::map<std::string, float> database;
+		std::map<std::string, float> input;
 };
 
 #endif

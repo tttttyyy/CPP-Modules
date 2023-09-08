@@ -30,49 +30,69 @@ void BitcoinExchange::exchange()
 		exit(2);
 	}
 	parseInput(tmp);
-	// while (pos != std::string::npos)
-	// 	m_filedata.push()
-
+	while (getline(infile, tmp))
+		parseInput(tmp);
 }
 
 void BitcoinExchange::parseInput(std::string &tmp)
 {
+	// std::cout << tmp << std::endl;
 	std::string date;
 	std::string value;
-	size_t	pos;
-	pos = tmp.find(" | ");
 	std::istringstream iss(tmp);
-	// while (getline(iss, date, '|'))
-	std::getline(iss, date, '|');
-	std::cout << date << std::endl;
+	if (!(std::getline(iss, date, '|')))
+		std::cerr << "Error: bad input => " << tmp << std::endl;
 	iss >> value;
 	float f = strtof(value.c_str(), NULL);
 	// float f = atof(date.c_str());
-	std::cout << f << std::endl;
-	// std::vector<int>::iterator it;
-	// for (it = m_arr.begin(); it != m_arr.end(); it++)
-	// 	std::cout << *it << std::endl;
-
+	if (!checkDate(date))
+		std::cerr << "Error: bad input => " << tmp << std::endl;
+	else if (f < 0)
+		std::cerr << "Error: not a positive number." << std::endl;
+	else if (f > 1000)
+		std::cerr << "Error: too large a number." << std::endl;
+	else
+		input[date] = f;
 }
 
-void convertDate(std::string &date)
+bool BitcoinExchange::checkDate(std::string &date)
 {
-	int datetmp[3];
+	static unsigned int datetmp[3];
+	std::string datecurr;
 	std::istringstream iss(date);
-	std::getline(iss, datetmp[0], '-');
-	std::cout << datetmp[0] << std::endl;
-
+	for (int i = 0; i < 3; i++)
+	{
+		std::getline(iss, datecurr, '-');
+		datetmp[i] = atoi(datecurr.c_str());
+	}
+	if (!valiDate(datetmp))
+		return false; //write vaild date funtion idtead of this if
+	return(true);
 }
-// std::string		tmp;
-// 	size_t			index = 0;
 
-// 	std::ofstream outfile(m_filename + ".replace");
-// 	{
-// 		outfile << tmp.substr(index, pos - index);
-// 		outfile << s2;
-// 		index = pos + s1.length();
-// 		pos = tmp.find(s1, pos + s1.length() + 1);
-// 	}
-// 	outfile << tmp.substr(index);
-// 	outfile.close();
-// 	infile.close();
+bool leapYear(unsigned int year)
+{
+	return(!(year % 400) || (!(year % 4) && year % 100));
+}
+
+bool BitcoinExchange::valiDate(unsigned int date[3])
+{
+	if (date[0] < 2009)
+		return (false);
+	switch(date[1])
+	{
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			return date[2] <= 30;
+		case 2:
+			if(leapYear(date[0]))
+				return date[2] <= 29;
+			else
+				return date[2] <= 28;
+		default:
+			return date[2] <=31;
+	}
+	return(true);
+}
