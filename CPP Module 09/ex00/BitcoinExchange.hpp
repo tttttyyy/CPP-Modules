@@ -25,7 +25,12 @@ class BitcoinExchange
 		void parseDatabase(std::string &);
 		bool checkDate(std::string &);
 		bool valiDate(unsigned int date[3]);
-		std::pair<std::string, float> fittingRate(const std::pair<std::string, float> &);
+		std::pair<std::string, float> matchingRate(std::string);
+
+		class IncorrectDatabaseException : public std::exception
+        {
+            const char* what() const throw();
+        };
 
 	private:
 		std::string m_filename;

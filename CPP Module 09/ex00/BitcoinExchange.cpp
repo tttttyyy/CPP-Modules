@@ -16,49 +16,53 @@ BitcoinExchange::~BitcoinExchange()
 
 void BitcoinExchange::exchange()
 {
-	std::ifstream	infile (m_filename);
-	if (!infile.is_open())
-	{
-		std::cerr << "\033[1;31m[ERROR] NO SUCH FILE !\033[0m" << std::endl;
-		exit(2);
-	}
-	std::string tmp;
-	if (!getline(infile, tmp))
-	{
-		std::cerr << "\033[1;31m[ERROR] FILE IS EMPTY !\033[0m" << std::endl;
-		infile.close();
-		exit(2);
-	}
-	parseInput(tmp);
-	while (getline(infile, tmp))
-		parseInput(tmp);
-}
-
-void BitcoinExchange::parseDatabase(std::string &)
-{
 	std::ifstream	database ("data.csv");
 	if (!database.is_open())
 	{
-		std::cerr << "\033[1;31m[ERROR] NO SUCH FILE !\033[0m" << std::endl;
+		std::cerr << "\033[1;31m[ERROR] NO SUCH DATABASE FILE !\033[0m" << std::endl;
 		exit(2);
 	}
-	std::string tmp;
-	if (!getline(database, tmp))
+	std::string tmpData;
+	if (!getline(database, tmpData))
 	{
-		std::cerr << "\033[1;31m[ERROR] FILE IS EMPTY !\033[0m" << std::endl;
+		std::cerr << "\033[1;31m[ERROR] DATABASE FILE IS EMPTY !\033[0m" << std::endl;
 		database.close();
 		exit(2);
 	}
+	while (getline(database, tmpData))
+		parseDatabase(tmpData);
+
+
+
+	std::ifstream	infile (m_filename);
+	if (!infile.is_open())
+	{
+		std::cerr << "\033[1;31m[ERROR] NO SUCH INPUT FILE !\033[0m" << std::endl;
+		exit(2);
+	}
+	std::string tmpInput;
+	if (!getline(infile, tmpInput))
+	{
+		std::cerr << "\033[1;31m[ERROR] INPUT FILE IS EMPTY !\033[0m" << std::endl;
+		infile.close();
+		exit(2);
+	}
+	while (getline(infile, tmpInput))
+		parseInput(tmpInput);
+}
+
+void BitcoinExchange::parseDatabase(std::string & tmp)
+{
+	std::istringstream iss(tmp);
 	std::string date;
 	std::string value;
-	std::istringstream iss(tmp);
 	if (!(std::getline(iss, date, ',')))
-		return;
+		throw IncorrectDatabaseException();
 	iss >> value;
 	float f = strtof(value.c_str(), NULL);
-	std::string tmp;
-	while (getline(database, tmp))
-	m_database.insert(std::make_pair(date, value));
+	if (!checkDate(date))
+		throw IncorrectDatabaseException();
+	m_database.insert(std::make_pair(date, f));
 }
 
 void BitcoinExchange::parseInput(std::string &tmp)
@@ -79,14 +83,18 @@ void BitcoinExchange::parseInput(std::string &tmp)
 		std::cerr << "Error: too large a number." << std::endl;
 	else
 	{
-		std::pair<std::string, float> curr = matchingRate();
-		std::cout << date << " => " << f 
+		std::pair<std::string, float> curr = matchingRate(date);
+		std::cout << date << " => " << f << " = " << f * curr.second << std::endl; 
 	}
 }
 
-std::pair<std::string, float> BitcoinExchange::fittingRate(const std::pair<std::string, float> &input)
+std::pair<std::string, float> BitcoinExchange::matchingRate(std::string date)
 {
-
+	std::map<std::string, float>::reverse_iterator it;
+	for(it = m_database.rbegin(); it != m_database.rend(); ++it)
+        if (it->first <= date)
+            return std::make_pair(it->first, it->second);
+	return std::make_pair(m_database.begin()->first, m_database.begin()->second);
 }
 
 bool BitcoinExchange::checkDate(std::string &date)
@@ -129,4 +137,9 @@ bool BitcoinExchange::valiDate(unsigned int date[3])
 			return date[2] <=31;
 	}
 	return(true);
+}
+
+const char* BitcoinExchange::IncorrectDatabaseException::what() const throw()
+{
+	return("\33[1;31m[ERROR] Incorrect Database !\33[0;m");	
 }
