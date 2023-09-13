@@ -7,5 +7,7 @@ int main(int argc, char **argv)
 		std::cerr << "\033[1;31m[ERROR] SHOULD INPUT ARRAY OF POSITIVE INTEGERS!" << std::endl;
 		exit(2);
 	}
-	for(int i = 0; i < argc; ++i)
+	PmergeMe obj;
+	obj.sort(argc, argv);
+
 }
