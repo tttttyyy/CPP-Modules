@@ -14,6 +14,17 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::sort(int argc, char **argv)
 {
+	for(int i = 1; i < argc; ++i)
+	{
+		for (int l = 0; argv[i][l]; l++)
+		{
+			if(!isdigit(argv[i][l]))
+			{
+				std::cerr << "\033[1;31m[ERROR] ONLY DIGITS!" << std::endl;
+				exit(2);
+			}
+		}
+	}
 	std::cout << "Before: ";
 	if(argc > 6)
 	{
@@ -27,12 +38,16 @@ void PmergeMe::sort(int argc, char **argv)
 			std::cout << argv[i] << ' ';
 		std::cout << std::endl;
 	}
-
+	struct timeval time;
+	double vStart = gettime(&time);
 	parseSequence(m_vectorSequence, argc, argv);
 	mergeInsert(m_vectorSequence, 0, m_vectorSequence.size() - 1);
+	double vEnd = gettime(&time);
 	
-	// parseSequence(m_dequeSequence, argc, argv);
-	// mergeInsert(m_dequeSequence, 0, m_dequeSequence.size() - 1);
+	double dStart = gettime(&time);
+	parseSequence(m_dequeSequence, argc, argv);
+	mergeInsert(m_dequeSequence, 0, m_dequeSequence.size() - 1);
+	double dEnd = gettime(&time);
 
 
 	std::cout << "After: ";
@@ -50,6 +65,8 @@ void PmergeMe::sort(int argc, char **argv)
 			std::cout << *it << ' ';
 		std::cout << std::endl;
 	}
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::[..] : " << (vEnd - vStart) / 1000 << std::endl;
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::[..] : " << (dEnd - dStart) / 1000 << std::endl;
 }
 
 template<typename Contain>
@@ -57,14 +74,6 @@ void PmergeMe::parseSequence(Contain &T, int argc, char **argv)
 {
 	for(int i = 1; i < argc; ++i)
 	{
-		for (int l = 0; argv[i][l]; l++)
-		{
-			if(!isdigit(argv[i][l]))
-			{
-				std::cerr << "\033[1;31m[ERROR] ONLY DIGITS!" << std::endl;
-				exit(2);
-			}
-		}
 		int num = atoi(argv[i]);
 		if (num > 0)
 			T.push_back(num);
@@ -155,4 +164,10 @@ void PmergeMe::merge(Contain &T,int left, int mid, int right)
 		index_sa2++;
 		indexMergedArray++;
 	}
+}
+
+double	PmergeMe::gettime(struct timeval *time)
+{
+	gettimeofday(time, NULL);
+	return ((time->tv_sec * 1000000) + (time->tv_usec));
 }

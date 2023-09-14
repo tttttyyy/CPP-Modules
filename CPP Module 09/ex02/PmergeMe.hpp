@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <sys/time.h>
 
 #define THRESHOLD 10
 
@@ -16,13 +17,13 @@ class PmergeMe
 		~PmergeMe();
 
 		void sort(int, char **);
+		double gettime(struct timeval *time);
 		template<typename Contain>
 		void mergeInsert(Contain &, int, int);
 		template<typename Contain>
 		void insertion(Contain &, int, int);
 		template<typename Contain>
 		void merge(Contain &, int, int, int);
-
 		template<typename Contain>
 		void parseSequence(Contain &, int, char **);
 
