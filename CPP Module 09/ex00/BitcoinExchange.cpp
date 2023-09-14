@@ -62,6 +62,7 @@ void BitcoinExchange::parseDatabase(std::string & tmp)
 	float f = strtof(value.c_str(), NULL);
 	if (!checkDate(date))
 		throw IncorrectDatabaseException();
+
 	m_database.insert(std::make_pair(date, f));
 }
 
@@ -83,8 +84,18 @@ void BitcoinExchange::parseInput(std::string &tmp)
 		std::cerr << "Error: too large a number." << std::endl;
 	else
 	{
-		std::pair<std::string, float> curr = matchingRate(date);
-		std::cout << date << " => " << f << " = " << f * curr.second << std::endl; 
+		int i;
+		for(i = 0; std::isspace(date[i]); i++)
+			;
+		int e;
+		for(e = date.size() - 1; std::isspace(date[e]); e--)
+			;
+		std::string tmp = date.substr(i);
+		std::cout << "tmp = '" << tmp << "'" << std::endl;
+		std::string tmp1 = tmp.substr(0, e + 1);
+		std::cout << "tmp1 = '" << tmp1 << "'" << std::endl;
+		std::pair<std::string, float> curr = matchingRate(tmp1);
+		std::cout << tmp1 << " => " << f << " = " << f * curr.second << std::endl; 
 	}
 }
 
