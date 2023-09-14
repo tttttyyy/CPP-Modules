@@ -14,6 +14,47 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::sort(int argc, char **argv)
 {
+	std::cout << "Before: ";
+	if(argc > 6)
+	{
+		for (int i = 1; i < 5; i++)
+			std::cout << argv[i] << ' ';
+		std::cout << "[...]" << std::endl;
+	}
+	else
+	{
+		for (int i = 1; i < argc; i++)
+			std::cout << argv[i] << ' ';
+		std::cout << std::endl;
+	}
+
+	parseSequence(m_vectorSequence, argc, argv);
+	mergeInsert(m_vectorSequence, 0, m_vectorSequence.size() - 1);
+	
+	// parseSequence(m_dequeSequence, argc, argv);
+	// mergeInsert(m_dequeSequence, 0, m_dequeSequence.size() - 1);
+
+
+	std::cout << "After: ";
+	if(m_vectorSequence.size() > 5)
+	{
+		std::vector<int>::iterator it;
+		for (it = m_vectorSequence.begin(); it < m_vectorSequence.begin() + 5 - 1; it++)
+			std::cout << *it << ' ';
+		std::cout << "[...]" << std::endl;
+	}
+	else
+	{
+		std::vector<int>::iterator it;
+		for (it = m_vectorSequence.begin(); it != m_vectorSequence.end(); it++)
+			std::cout << *it << ' ';
+		std::cout << std::endl;
+	}
+}
+
+template<typename Contain>
+void PmergeMe::parseSequence(Contain &T, int argc, char **argv)
+{
 	for(int i = 1; i < argc; ++i)
 	{
 		for (int l = 0; argv[i][l]; l++)
@@ -26,51 +67,92 @@ void PmergeMe::sort(int argc, char **argv)
 		}
 		int num = atoi(argv[i]);
 		if (num > 0)
-			m_vectorSequence.push_back(num);
+			T.push_back(num);
 		else
 		{
 			std::cerr << "\033[1;31m[ERROR] ONLY POSITIVE INTEGERS!" << std::endl;
 			exit(2);
 		}
 	}
-	mergeInsert(0, m_vectorSequence.size() - 1);
-	std::vector<int>::iterator it = m_vectorSequence.begin();
-	for (; it != m_vectorSequence.end(); it++)
-		std::cout << *it << std::endl;
-
 }
 
-void PmergeMe::mergeInsert(int left, int right)
+template<typename Contain>
+void PmergeMe::mergeInsert(Contain &T, int left, int right)
 {
 	if(left < right)
 	{
 		if(right - left <= THRESHOLD)
-			insertion(left, right);
+			insertion(T, left, right);
 		else
 		{
 			int mid = left + (right - left) / 2;
-			mergeInsert(mid + 1, right);
-			mergeInsert(left, mid);
-			// merge(left, mid, right);
+			mergeInsert(T, mid + 1, right);
+			mergeInsert(T, left, mid);
+			merge(T, left, mid, right);
 		}
 	}
 }
 
-void PmergeMe::insertion(int left, int right)
+template<typename Contain>
+void PmergeMe::insertion(Contain &T, int left, int right)
 {
 	int  j;
-    for (int i = left + 1; i < right; i++)
+    for (int i = left + 1; i <= right; i++)
 	{
-        int key = m_vectorSequence[i];
+        int key = T[i];
         j = i - 1;
         // Move elements of m_vectorSequence[0..i-1],
         // that are greater than key,
         // to one position ahead of their
         // current position
-        while (j >= 0 && m_vectorSequence[j] > key) {
-            m_vectorSequence[j + 1] = m_vectorSequence[j];
-            j = j - 1;
+        while (j >= 0 && T[j] > key)
+		{
+            T[j + 1] = T[j];
+            j--;
         }
-        m_vectorSequence[j + 1] = key;
+        T[j + 1] = key;
     }
+}
+
+template<typename Contain>
+void PmergeMe::merge(Contain &T,int left, int mid, int right)
+{
+	int const size_sa1 = mid - left + 1;
+	int const size_sa2 = right- mid;
+
+	std::vector<int> sa1(size_sa1);
+	std::vector<int> sa2(size_sa2);
+	for(int i = 0; i < size_sa1; i++)
+		sa1[i] = T[left + i];
+	for(int i = 0; i < size_sa2; i++)
+		sa2[i] = T[mid + 1+ i];
+
+	int index_sa1 = 0, index_sa2 = 0;
+	int indexMergedArray = left;
+	while(index_sa1 < size_sa1 && index_sa2 < size_sa2)
+	{
+		if(sa1[index_sa1] <= sa2[index_sa2])
+		{
+			T[indexMergedArray] = sa1[index_sa1];
+			index_sa1++;
+		}
+		else
+		{
+			T[indexMergedArray] = sa2[index_sa2];
+			index_sa2++;
+		}
+		indexMergedArray++;
+	}
+	while(index_sa1 < size_sa1)
+	{
+		T[indexMergedArray] = sa1[index_sa1];
+		index_sa1++;
+		indexMergedArray++;
+	}
+	while(index_sa2 < size_sa2)
+	{
+		T[indexMergedArray] = sa2[index_sa2];
+		index_sa2++;
+		indexMergedArray++;
+	}
 }

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 
 #define THRESHOLD 10
 
@@ -14,11 +15,20 @@ class PmergeMe
 		PmergeMe& operator=(const PmergeMe &);
 		~PmergeMe();
 
-		void sort(int argc, char **argv);
-		void mergeInsert(int, int);
-		void insertion(int, int);
+		void sort(int, char **);
+		template<typename Contain>
+		void mergeInsert(Contain &, int, int);
+		template<typename Contain>
+		void insertion(Contain &, int, int);
+		template<typename Contain>
+		void merge(Contain &, int, int, int);
+
+		template<typename Contain>
+		void parseSequence(Contain &, int, char **);
+
 	private:
 		std::vector<int> m_vectorSequence;
+		std::deque<int> m_dequeSequence;
 };
 
 #endif
