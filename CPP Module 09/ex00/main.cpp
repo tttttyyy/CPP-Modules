@@ -8,6 +8,13 @@ int main(int argc, char **argv)
 		std::cerr << "\033[1;31m[ERROR] NO INPUT FILES ARE FOUND!" << std::endl;
 		exit(2);
 	}
-	BitcoinExchange btc(argv[1]);
-	btc.exchange();
+	try
+	{
+		BitcoinExchange btc(argv[1]);
+		btc.exchange();
+	}
+	catch(std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 }

@@ -71,12 +71,12 @@ void BitcoinExchange::parseInput(std::string &tmp)
 	std::string date;
 	std::string value;
 	std::istringstream iss(tmp);
-	if (!(std::getline(iss, date, '|')))
+	if (!(std::getline(iss, date, '|')) || !tmp.find("|"))
 		std::cerr << "Error: bad input => " << tmp << std::endl;
 	iss >> value;
 	float f = strtof(value.c_str(), NULL);
 	// float f = atof(date.c_str());
-	if (!checkDate(date))
+	if (!checkDate(date) || value.find(" ") != std::string::npos || date.empty() || value.empty())
 		std::cerr << "Error: bad input => " << tmp << std::endl;
 	else if (f < 0)
 		std::cerr << "Error: not a positive number." << std::endl;
@@ -84,21 +84,24 @@ void BitcoinExchange::parseInput(std::string &tmp)
 		std::cerr << "Error: too large a number." << std::endl;
 	else
 	{
-		int i;
-		for(i = 0; std::isspace(date[i]); i++)
-			;
-		int e;
-		for(e = date.size() - 1; std::isspace(date[e]); e--)
-			;
-		std::string tmp = date.substr(i);
-		std::cout << "tmp = '" << tmp << "'" << std::endl;
-		std::string tmp1 = tmp.substr(0, e + 1);
-		std::cout << "tmp1 = '" << tmp1 << "'" << std::endl;
-		std::pair<std::string, float> curr = matchingRate(tmp1);
-		std::cout << tmp1 << " => " << f << " = " << f * curr.second << std::endl; 
+		std::string tmp = trim(date);
+		std::pair<std::string, float> curr = matchingRate(tmp);
+		std::cout << tmp << " => " << f << " = " << f * curr.second << std::endl; 
 	}
 }
 
+std::string BitcoinExchange::trim(std::string date)
+{
+	int i;
+	for(i = 0; std::isspace(date[i]); i++)
+		;
+	std::string tmp = date.substr(i);
+	int e;
+	for(e = tmp.size() - 1; std::isspace(tmp[e]); e--)
+		;
+	std::string tmp1 = tmp.substr(0, e + 1);
+	return(tmp1);
+}
 std::pair<std::string, float> BitcoinExchange::matchingRate(std::string date)
 {
 	std::map<std::string, float>::reverse_iterator it;
@@ -110,9 +113,12 @@ std::pair<std::string, float> BitcoinExchange::matchingRate(std::string date)
 
 bool BitcoinExchange::checkDate(std::string &date)
 {
+	std::string date_tmp = trim(date);
+	if(date_tmp.find(" ") != std::string::npos || date_tmp.empty())
+		return(false);
 	static unsigned int datetmp[3];
 	std::string datecurr;
-	std::istringstream iss(date);
+	std::istringstream iss(date_tmp);
 	for (int i = 0; i < 3; i++)
 	{
 		std::getline(iss, datecurr, '-');
