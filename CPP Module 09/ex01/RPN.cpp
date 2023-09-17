@@ -17,20 +17,27 @@ RPN::~RPN()
 
 void RPN::calculate()
 {
-	std::istringstream iss(m_arg);
-	std::string token;
+	// std::istringstream iss(m_arg);
+	// std::string token;
 
-	while(iss >> token)
+	// while(iss >> token)
+	for(int i = 0; m_arg[i]; i++)
 	{
-		if(isdigit(token[0]) || (token[0] == '-' && isdigit(token[1])))
-			rpn.push(atoi(token.c_str()));
-		else
+		if (m_arg[i] == ' ')
+			continue;
+		else if(isdigit(m_arg[i]))
+		{
+			if (m_arg[i + 1] != ' ')
+				throw IncorrectRPNExpression();
+			rpn.push(m_arg[i] - 48);
+		}
+		else if (m_arg[i] == '+' || m_arg[i] == '*' || m_arg[i] == '/' || m_arg[i] == '-')
 		{
 			int operand1 = rpn.top();
 			rpn.pop();
 			int operand2 = rpn.top();
 			rpn.pop();
-			switch(token[0])
+			switch(m_arg[i])
 			{
 				case '+' :
 					rpn.push(operand2 + operand1);
@@ -48,9 +55,10 @@ void RPN::calculate()
 					throw IncorrectRPNExpression();
 			}
 		}
-
+		else
+			throw IncorrectRPNExpression();
 	}
-     std::cout << rpn.top() <<" ";
+	std::cout << rpn.top() << std::endl; 
     rpn.pop();
 }
 

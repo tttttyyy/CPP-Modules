@@ -30,7 +30,11 @@ void BitcoinExchange::exchange()
 		exit(2);
 	}
 	while (getline(database, tmpData))
+	{
+		if(tmpData.empty())
+			continue;
 		parseDatabase(tmpData);
+	}
 
 
 
@@ -48,7 +52,11 @@ void BitcoinExchange::exchange()
 		exit(2);
 	}
 	while (getline(infile, tmpInput))
+	{
+		if(tmpInput.empty())
+			continue;
 		parseInput(tmpInput);
+	}
 }
 
 void BitcoinExchange::parseDatabase(std::string & tmp)
@@ -124,7 +132,9 @@ bool BitcoinExchange::checkDate(std::string &date)
 		std::getline(iss, datecurr, '-');
 		datetmp[i] = atoi(datecurr.c_str());
 	}
-	if (!valiDate(datetmp))
+	std::string left;
+	iss >> left;
+	if (!valiDate(datetmp) || !left.empty())
 		return false; //write vaild date funtion idtead of this if
 	return(true);
 }
