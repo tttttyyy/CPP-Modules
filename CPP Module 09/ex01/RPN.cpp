@@ -7,20 +7,22 @@ RPN::RPN(const std::string & arg) : m_arg(arg)
 {}
 
 RPN::RPN(const RPN &toCopy)
-{ (void)toCopy; }
+{ *this = toCopy; }
 
 RPN& RPN::operator=(const RPN &toCopy)
-{ (void)toCopy; return(*this); }
+{
+	if(this != &toCopy)
+	{
+		m_arg = toCopy.m_arg;
+		rpn = toCopy.m_arg;
+	}
+	return(*this);
+}
 
-RPN::~RPN()
-{}
+RPN::~RPN() {}
 
 void RPN::calculate()
 {
-	// std::istringstream iss(m_arg);
-	// std::string token;
-
-	// while(iss >> token)
 	for(int i = 0; m_arg[i]; i++)
 	{
 		if (m_arg[i] == ' ')
@@ -33,9 +35,9 @@ void RPN::calculate()
 		}
 		else if (m_arg[i] == '+' || m_arg[i] == '*' || m_arg[i] == '/' || m_arg[i] == '-')
 		{
-			int operand1 = rpn.top();
+			double operand1 = rpn.top();
 			rpn.pop();
-			int operand2 = rpn.top();
+			double operand2 = rpn.top();
 			rpn.pop();
 			switch(m_arg[i])
 			{

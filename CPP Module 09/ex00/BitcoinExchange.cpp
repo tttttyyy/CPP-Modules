@@ -6,10 +6,17 @@ BitcoinExchange::BitcoinExchange()
 BitcoinExchange::BitcoinExchange(std::string filename) : m_filename(filename) {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &toCopy)
-{(void)toCopy;}
+{ *this = toCopy; }
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &toCopy)
-{(void)toCopy; return(*this);}
+{ 
+	if (this != &toCopy)
+	{
+		m_database = toCopy.m_database;
+		m_filename = toCopy.m_filename;
+	}
+	return(*this);
+}
 
 BitcoinExchange::~BitcoinExchange()
 {}
@@ -83,7 +90,7 @@ void BitcoinExchange::parseInput(std::string &tmp)
 		std::cerr << "Error: bad input => " << tmp << std::endl;
 	iss >> value;
 	float f = strtof(value.c_str(), NULL);
-	// float f = atof(date.c_str());
+	// float f = atof(value.c_str());
 	if (!checkDate(date) || value.find(" ") != std::string::npos || date.empty() || value.empty())
 		std::cerr << "Error: bad input => " << tmp << std::endl;
 	else if (f < 0)
@@ -135,7 +142,7 @@ bool BitcoinExchange::checkDate(std::string &date)
 	std::string left;
 	iss >> left;
 	if (!valiDate(datetmp) || !left.empty())
-		return false; //write vaild date funtion idtead of this if
+		return false;
 	return(true);
 }
 

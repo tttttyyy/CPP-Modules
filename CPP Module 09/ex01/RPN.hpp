@@ -22,7 +22,7 @@ class RPN
 		};
 	private:
 		std::string m_arg;
-		std::stack<int> rpn;
+		std::stack<double> rpn;
 
 };
 

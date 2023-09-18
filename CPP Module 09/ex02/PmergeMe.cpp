@@ -1,16 +1,21 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe()
-{}
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(const PmergeMe &toCopy)
 { (void)toCopy; }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe &toCopy)
-{ (void)toCopy; return(*this); }
+{
+	if(this != toCopy)
+	{
+		m_vectorSequence = toCopy.m_vectorSequence;
+		m_dequeSequence = toCopy.m_dequeSequence;
+	}
+	return(*this);
+}
 
-PmergeMe::~PmergeMe()
-{}
+PmergeMe::~PmergeMe() {}
 
 void PmergeMe::sort(int argc, char **argv)
 {
@@ -110,10 +115,6 @@ void PmergeMe::insertion(Contain &T, int left, int right)
 	{
         int key = T[i];
         j = i - 1;
-        // Move elements of m_vectorSequence[0..i-1],
-        // that are greater than key,
-        // to one position ahead of their
-        // current position
         while (j >= 0 && T[j] > key)
 		{
             T[j + 1] = T[j];
