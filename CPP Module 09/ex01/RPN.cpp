@@ -14,7 +14,7 @@ RPN& RPN::operator=(const RPN &toCopy)
 	if(this != &toCopy)
 	{
 		m_arg = toCopy.m_arg;
-		rpn = toCopy.m_arg;
+		rpn = toCopy.rpn;
 	}
 	return(*this);
 }

@@ -7,7 +7,7 @@ PmergeMe::PmergeMe(const PmergeMe &toCopy)
 
 PmergeMe& PmergeMe::operator=(const PmergeMe &toCopy)
 {
-	if(this != toCopy)
+	if(this != &toCopy)
 	{
 		m_vectorSequence = toCopy.m_vectorSequence;
 		m_dequeSequence = toCopy.m_dequeSequence;
@@ -70,8 +70,8 @@ void PmergeMe::sort(int argc, char **argv)
 			std::cout << *it << ' ';
 		std::cout << std::endl;
 	}
-	std::cout << "Time to process a range of " << argc - 1 << " elements with std::[..] : " << (vEnd - vStart) / 1000 << std::endl;
-	std::cout << "Time to process a range of " << argc - 1 << " elements with std::[..] : " << (dEnd - dStart) / 1000 << std::endl;
+	std::cout << "Time to process a vector range of " << argc - 1 << " elements with std::[..] : " << (vEnd - vStart) / 1000 << std::endl;
+	std::cout << "Time to process a deque range of " << argc - 1 << " elements with std::[..] : " << (dEnd - dStart) / 1000 << std::endl;
 }
 
 template<typename Contain>

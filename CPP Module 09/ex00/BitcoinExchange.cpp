@@ -58,6 +58,12 @@ void BitcoinExchange::exchange()
 		infile.close();
 		exit(2);
 	}
+	if (tmpInput != "date | value")
+	{
+		std::cerr << "\033[1;31m[ERROR] INCORRECT DATA | VALUE !\033[0m" << std::endl;
+		infile.close();
+		exit(2);
+	}
 	while (getline(infile, tmpInput))
 	{
 		if(tmpInput.empty())
@@ -83,12 +89,22 @@ void BitcoinExchange::parseDatabase(std::string & tmp)
 
 void BitcoinExchange::parseInput(std::string &tmp)
 {
-	std::string date;
+	std::string tmp_date;
 	std::string value;
 	std::istringstream iss(tmp);
-	if (!(std::getline(iss, date, '|')) || !tmp.find("|"))
+	size_t delimiter = tmp.find('|');
+	if (!(std::getline(iss, tmp_date, '|')) || !delimiter)
 		std::cerr << "Error: bad input => " << tmp << std::endl;
-	iss >> value;
+	value = tmp.substr(delimiter + 2);
+	std::string date = trim(tmp_date);
+	for(int i = 0; value[i]; i++)
+	{
+		if(!isdigit(value[i]) || date > m_database.rbegin()->first || date < (m_database.begin())->first)
+		{
+			std::cerr << "Error: bad input => " << tmp << std::endl;
+			return;
+		}
+	}
 	float f = strtof(value.c_str(), NULL);
 	// float f = atof(value.c_str());
 	if (!checkDate(date) || value.find(" ") != std::string::npos || date.empty() || value.empty())
@@ -99,9 +115,8 @@ void BitcoinExchange::parseInput(std::string &tmp)
 		std::cerr << "Error: too large a number." << std::endl;
 	else
 	{
-		std::string tmp = trim(date);
-		std::pair<std::string, float> curr = matchingRate(tmp);
-		std::cout << tmp << " => " << f << " = " << f * curr.second << std::endl; 
+		std::pair<std::string, float> curr = matchingRate(date);
+		std::cout << date << " => " << f << " = " << f * curr.second << std::endl; 
 	}
 }
 
@@ -128,12 +143,11 @@ std::pair<std::string, float> BitcoinExchange::matchingRate(std::string date)
 
 bool BitcoinExchange::checkDate(std::string &date)
 {
-	std::string date_tmp = trim(date);
-	if(date_tmp.find(" ") != std::string::npos || date_tmp.empty())
+	if(date.find(" ") != std::string::npos || date.empty())
 		return(false);
 	static unsigned int datetmp[3];
 	std::string datecurr;
-	std::istringstream iss(date_tmp);
+	std::istringstream iss(date);
 	for (int i = 0; i < 3; i++)
 	{
 		std::getline(iss, datecurr, '-');
@@ -153,8 +167,6 @@ bool leapYear(unsigned int year)
 
 bool BitcoinExchange::valiDate(unsigned int date[3])
 {
-	if (date[0] < 2009)
-		return (false);
 	switch(date[1])
 	{
 		case 4:
@@ -167,8 +179,16 @@ bool BitcoinExchange::valiDate(unsigned int date[3])
 				return date[2] <= 29;
 			else
 				return date[2] <= 28;
-		default:
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
 			return date[2] <=31;
+		default:
+			return (false);
 	}
 	return(true);
 }

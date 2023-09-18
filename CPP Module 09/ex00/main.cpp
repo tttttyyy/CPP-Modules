@@ -2,16 +2,20 @@
 
 int main(int argc, char **argv)
 {
-	(void)argv;
-	if (argc != 2)
-	{
-		std::cerr << "\033[1;31m[ERROR] NO INPUT FILES ARE FOUND!" << std::endl;
-		exit(2);
-	}
+	(void)argc;
+	// if (argc != 2)
+	// {
+	// 	std::cerr << "\033[1;31m[ERROR] NO INPUT FILES ARE FOUND!" << std::endl;
+	// 	exit(2);
+	// }
 	try
 	{
-		BitcoinExchange btc(argv[1]);
-		btc.exchange();
+		for (int i = 1; argv[i]; i++)
+		{
+			BitcoinExchange btc(argv[i]);
+			btc.exchange();
+
+		}
 	}
 	catch(std::exception &e)
 	{
