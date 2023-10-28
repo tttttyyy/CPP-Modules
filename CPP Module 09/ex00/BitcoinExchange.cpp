@@ -89,25 +89,27 @@ void BitcoinExchange::parseDatabase(std::string & tmp)
 
 void BitcoinExchange::parseInput(std::string &tmp)
 {
-	std::string tmp_date;
+	std::string date;
 	std::string value;
 	std::istringstream iss(tmp);
 	size_t delimiter = tmp.find('|');
-	if (!(std::getline(iss, tmp_date, '|')) || !delimiter)
+	if (!(std::getline(iss, date, '|')) || !delimiter)
 		std::cerr << "Error: bad input => " << tmp << std::endl;
-	value = tmp.substr(delimiter + 2);
-	std::string date = trim(tmp_date);
+	value = tmp.substr(delimiter + 1);
+	trim(date);
 	for(int i = 0; value[i]; i++)
 	{
-		if(!isdigit(value[i]) || date > m_database.rbegin()->first || date < (m_database.begin())->first)
+		if(date > m_database.rbegin()->first ||
+		date < (m_database.begin())->first || date[4] != '-' || date[7] != '-')
 		{
 			std::cerr << "Error: bad input => " << tmp << std::endl;
 			return;
 		}
 	}
+	trim(value);
 	float f = strtof(value.c_str(), NULL);
 	// float f = atof(value.c_str());
-	if (!checkDate(date) || value.find(" ") != std::string::npos || date.empty() || value.empty())
+	if (!checkDate(date) || value.find(" ") != std::string::npos || date.empty() || value.empty() || date.length() != 10)
 		std::cerr << "Error: bad input => " << tmp << std::endl;
 	else if (f < 0)
 		std::cerr << "Error: not a positive number." << std::endl;
@@ -120,7 +122,7 @@ void BitcoinExchange::parseInput(std::string &tmp)
 	}
 }
 
-std::string BitcoinExchange::trim(std::string date)
+void BitcoinExchange::trim(std::string &date)
 {
 	int i;
 	for(i = 0; std::isspace(date[i]); i++)
@@ -130,7 +132,7 @@ std::string BitcoinExchange::trim(std::string date)
 	for(e = tmp.size() - 1; std::isspace(tmp[e]); e--)
 		;
 	std::string tmp1 = tmp.substr(0, e + 1);
-	return(tmp1);
+	date = tmp1;
 }
 std::pair<std::string, float> BitcoinExchange::matchingRate(std::string date)
 {
