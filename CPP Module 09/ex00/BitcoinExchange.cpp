@@ -107,9 +107,10 @@ void BitcoinExchange::parseInput(std::string &tmp)
 		}
 	}
 	trim(value);
-	float f = strtof(value.c_str(), NULL);
+	char *end;
+	float f = strtof(value.c_str(), &end);
 	// float f = atof(value.c_str());
-	if (!checkDate(date) || value.find(" ") != std::string::npos || date.empty() || value.empty() || date.length() != 10)
+	if (!checkDate(date) || value.find(" ") != std::string::npos || date.empty() || value.empty() || date.length() != 10 || *end)
 		std::cerr << "Error: bad input => " << tmp << std::endl;
 	else if (f < 0)
 		std::cerr << "Error: not a positive number." << std::endl;
